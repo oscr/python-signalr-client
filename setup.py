@@ -3,8 +3,8 @@
 from setuptools import setup, find_packages
 
 install_requires = \
-    ['requests>=2.18.4',
-     'websockets>=4.0.1'
+    ['requests>=2.28.1',
+     'websockets>=10.3'
      ]
 
 setup(
@@ -25,8 +25,8 @@ setup(
         'Intended Audience :: Information Technology',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10'
     ]
 )

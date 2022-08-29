@@ -15,7 +15,7 @@ import json
 
 async def process_message(message):
     deflated_msg = decompress(b64decode(message), -MAX_WBITS)
-    return json.loads(deflated_msg.decode())
+    return json.loads(deflated_msg.decode("utf-8-sig"))
 
 
 # Create debug message handler.

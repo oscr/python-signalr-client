@@ -5,8 +5,18 @@
 # Stanislav Lazarov
 
 # A practical example showing how to connect to Bittrex
+import sys
+sys.path.append("../signalr_aio")
+
 from signalr_aio import Connection
 
+
+topics = ["Heartbeat", "CarData.z", "Position.z",
+          "ExtrapolatedClock", "TopThree", "RcmSeries",
+          "TimingStats", "TimingAppData",
+          "WeatherData", "TrackStatus", "DriverList",
+          "RaceControlMessages", "SessionInfo",
+          "SessionData", "LapCount", "TimingData"]
 
 # Create debug message handler.
 async def on_debug(**msg):
@@ -25,22 +35,22 @@ async def on_message(msg):
 
 if __name__ == "__main__":
     # Create connection
-    connection = Connection('https://socket-stage.bittrex.com/signalr/')
+    connection = Connection('https://livetiming.formula1.com/signalr')
 
     # Register hub
-    hub = connection.register_hub('coreHub')
+    hub = connection.register_hub('Streaming')
 
     # Assign debug message handler. It streams unfiltered data, uncomment it to test.
-    # connection.received += on_debug
+    connection.received += on_debug
 
     # Assign error handler
     connection.error += on_error
 
     # Assign hub message handler
-    hub.client.on('updateExchangeState', on_message)
+    hub.client.on('feed', on_message)
 
     # Send a message
-    hub.server.invoke('SubscribeToExchangeDeltas', 'BTC-ETH')
+    hub.server.invoke('Subscribe', topics)
 
     # Start the client
     connection.start()
